@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+      
+    <EditTextPreference 
+        android:title="Popup Advertising"
+        android:key="PopupMinute"
+        android:summary="Set how long that you don't use app, then show advertising (in minute)"
+        android:defaultValue="3"
+        android:inputType="number" />
+    
+    <EditTextPreference 
+        android:title="Show Image Time"
+        android:key="ShowMinute"
+        android:summary="Set how long that will show a image advertising (in minute)"
+        android:defaultValue="1"
+        android:inputType="number" />
+	
+</PreferenceScreen>
