@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import usbserial.driver.UsbSerialDriver;
@@ -19,9 +20,10 @@ import java.util.concurrent.Executors;
 
 public class SerialConsoleActivity extends Activity {
 
-    private static  UsbSerialDriver sDriver = null;
-    private static  String app_folder;
-    private String  show_text;
+    private static    UsbSerialDriver sDriver = null;
+    private static    String app_folder;
+    private String    show_text;
+    private TowerLamp towerLamp;
 
     private final   String TAG = SerialConsoleActivity.class.getSimpleName();
     private final   String END_WORD = "TOTAL";
@@ -139,28 +141,26 @@ public class SerialConsoleActivity extends Activity {
                 public void run() {
 //        			Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
 
-//        			basket = new Basket();
-//                	basket.readTextReceive(show_text);
-//                	closeImageAds();
+        			towerLamp = new TowerLamp();
+                    Log.d("DATAMSG", show_text);
+                	towerLamp.readTextReceive(show_text);
+
                     showResult();
-//                	doStartShowAdsTask();
+
                     // clear file_string
                     file_string.setLength(0);
                     file_string.trimToSize();
                 }
             });
-        	
-        	/*
-        	basket = new Basket();
-        	basket.readTextReceive(show_text);
-        	closeImageAds();
-        	*/
-        	showResult();
-        	/*doStartShowAdsTask();
-        	// clear file_string
-        	file_string.setLength(0);
-        	file_string.trimToSize();
-        	*/
+
+//        	towerLamp = new TowerLamp();
+//        	towerLamp.readTextReceive(show_text);
+//
+//            showResult();
+//
+//        	// clear file_string
+//        	file_string.setLength(0);
+//        	file_string.trimToSize();
         }
     }
     
@@ -168,20 +168,11 @@ public class SerialConsoleActivity extends Activity {
     public void showResult() {
 //        try {
 //
-//        	TextView hdNo = (TextView) findViewById(R.id.txt_hdNo);
-//            hdNo.setText(basket.No());
-//
-//            TextView hdType = (TextView) findViewById(R.id.txt_hdType);
-//            hdType.setText(basket.Type());
-//
-//            TextView hdDate = (TextView) findViewById(R.id.txt_hdDate);
-//            hdDate.setText(basket.Date());
-//
-//            TextView hdLabel = (TextView) findViewById(R.id.txt_hdLabel);
-//            hdLabel.setText(basket.Label());
-//
-//            TextView hdOP = (TextView) findViewById(R.id.txt_hdOP);
-//            hdOP.setText(basket.OP());
+        	TextView lampSta = (TextView) findViewById(R.id.lampSta);
+            lampSta.setText(towerLamp.getLampStatus());
+
+            TextView lampErr = (TextView) findViewById(R.id.lampErr);
+            lampErr.setText(towerLamp.getLampErrorMsg());
 //
 //            // --------------------- begin add currency row ---------------------
 //            int iTotalPrice = 0;
